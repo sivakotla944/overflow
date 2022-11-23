@@ -14,8 +14,8 @@ app.get('/' , (req,res)=>{
     res.send("this is  a stackoverflow clone API")
 })
 
-app.use('./user',userRoutes)
-// app.use('./questions',questionRoutes)
+app.use('/user',userRoutes)
+// app.use('/questions',questionRoutes)
 
 
 const PORT = process.PORT || 5000
