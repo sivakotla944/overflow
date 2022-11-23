@@ -14,11 +14,11 @@ app.get('/' , (req,res)=>{
     res.send("this is  a stackoverflow clone API")
 })
 
-app.use('./user',userRoutes)
-// app.use('./questions',questionRoutes)
+app.use('/user',userRoutes)
+// app.use('/questions',questionRoutes)
 
 
-const PORT = process.PORT || 5000
+const PORT = process.PORT || 8000
 
 const CONNCETION_URL = "mongodb+srv://Siva:Siva1000@stack-overflow-clone.q7sekyl.mongodb.net/?retryWrites=true&w=majority"
 

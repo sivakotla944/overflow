@@ -1,13 +1,6 @@
-
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-
-import User from '../models/auth.js'
-
-
-
-
-
+import User from './models/auth.js'
 
 export const signup  = async(req,res) =>{
 
@@ -15,6 +8,7 @@ export const signup  = async(req,res) =>{
     try{
         const existingUser = User.findOne({email});
         if(existingUser){
+            console.log("UserExist")
             return res.status(404).json({message : "User already Exist."})
         }
 
@@ -24,19 +18,17 @@ export const signup  = async(req,res) =>{
         res.status(200).json({result : newUser, token})
 
     }catch(error){
-
+        console.log(error)
         res.status(500).json("something went wrong")
-
     }
 
 }
 
 export const login  = async(req,res) =>{
-
-
     const {email, password } = req.body;
+    console.log(email,password)
     try{
-        const existingUser = User.findOne({email});
+        const existingUser =await User.findOne({email});
         if(!existingUser){
             return res.status(404).json({message : "User don't Exist."})
         }
@@ -48,9 +40,8 @@ export const login  = async(req,res) =>{
       const token = jwt.sign({email : newUser.email , id:newUser._id }, "test", {expiresIn : "1h"})
         res.status(200).json({result : newUser, token})
 
-
     }catch(error){
-
+        console.log(error)
         res.status(500).json("something went wrong")
 
     }
